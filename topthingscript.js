@@ -228,6 +228,8 @@ let new_domain_text = "https://maciej.pub";
 if (window.location.origin == new_domain_text && localStorage.sessions < 1) {
   console.log("Transferring data...")
   window.addEventListener("message", function (e) {
+    console.log(e.origin)
+    console.log(e.data)
     if (e.origin == old_domain_text) {
       let data = JSON.parse(e.data);
       localStorage.clear();
