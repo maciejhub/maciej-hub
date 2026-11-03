@@ -17,6 +17,7 @@ function createnewpopup(id, content, second_button, audio, style) {
       audio = null;
     }
     popup.remove();
+    localStorage.setItem("movedData", true);
   };
   popupnumber += 1;
   return popupnumber - 1
