@@ -228,7 +228,6 @@ let old_window = undefined;
 
 function fuck() {
   console.log("fuck")
-  if (true) {
     console.log("Transferring data...")
 
     window.addEventListener("message", function (e) {
@@ -250,9 +249,8 @@ function fuck() {
     });
 
     old_window = window.open(`${old_domain_text}/data-mover`, '', 'width=0,height=0');
-  }
 }
 
-if (localStorage.movedData) {
+if (!localStorage.movedData) {
   createnewpopup("fuck", "maciej hub ma nową domenę! Teraz zamiast <a href='https://maciejhub.github.io'>maciejhub.github.io</a> jest <a href='https://maciej.pub'>maciej.pub</a>. Czy chcesz przenieść danę ze starej domeny?", "<button class='centerpopupbutton' onclick='fuck()'>Tak</button>")
 }
