@@ -245,6 +245,7 @@ function fuck() {
         }
         old_window.close();
         get("fuck").remove();
+        localStorage.setItem("movedData", true)
       }
     });
 
@@ -252,6 +253,6 @@ function fuck() {
   }
 }
 
-if (localStorage.sessions < 1) {
+if (localStorage.movedData) {
   createnewpopup("fuck", "maciej hub ma nową domenę! Teraz zamiast <a href='https://maciejhub.github.io'>maciejhub.github.io</a> jest <a href='https://maciej.pub'>maciej.pub</a>. Czy chcesz przenieść danę ze starej domeny?", "<button class='centerpopupbutton' onclick='fuck()'>Tak</button>")
 }
