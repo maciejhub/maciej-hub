@@ -222,13 +222,13 @@ setTimeout(function () {
   });
 }, 500);
 
-let old_domain_text = "https://maciejhub.github.io";
-let new_domain_text = "https://maciej.pub";
+let old_domain_text = "http://localhost:8000";
+let new_domain_text = "http://localhost:8079";
 let old_window = undefined;
 
 function fuck() {
   console.log("fuck")
-  if (window.location.origin == new_domain_text && localStorage.sessions < 1) {
+  if (true) {
     console.log("Transferring data...")
 
     window.addEventListener("message", function (e) {
@@ -244,13 +244,14 @@ function fuck() {
           localStorage.setItem("sessions", 1)
         }
         old_window.close();
+        get("fuck").remove();
       }
     });
 
-    old_window = window.open(`${old_domain_text}/data-mover`, '', 'width=0,height=0');
+    old_window = window.open(`${old_domain_text}`, '', 'width=0,height=0');
   }
 }
 
 if (localStorage.sessions < 1) {
-  createnewpopup("fuckpopup", "maciej hub ma nową domenę! Teraz zamiast wchodzenia na stronę <a href='https://maciejhub.github.io'>maciejhub.github.io</a> to wchodzi się na <a href='https://maciej.pub'>maciej.pub</a>. Czy chcesz przenieść danę ze starej domeny?", "<button class='centerpopupbutton' onclick='fuck()'>Tak</button>")
+  createnewpopup("fuck", "maciej hub ma nową domenę! Teraz zamiast <a href='https://maciejhub.github.io'>maciejhub.github.io</a> jest <a href='https://maciej.pub'>maciej.pub</a>. Czy chcesz przenieść danę ze starej domeny?", "<button class='centerpopupbutton' onclick='fuck()'>Tak</button>")
 }
