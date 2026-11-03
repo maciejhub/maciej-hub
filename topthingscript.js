@@ -11,7 +11,7 @@ if (localStorage.ikonpng == "/premiumikon.png") {
 }
 let icon = localStorage.ikonpng
 if (localStorage.ikonpng == "/randomikon.png") {
-  let icons = ["ogikon", "rmikon", "star", "znikon", "bdikon"]
+  let icons = ["ogikon", "rmikon", "star", "znikon", "bdikon", "pubikon"]
   icons.forEach(function (icon) {
     if (!localStorage.boughtItems.includes(icon)) {
       icons.splice(icons.indexOf(icon), 1)
@@ -29,6 +29,7 @@ if (document.getElementById("topthing")) {
 } else {
   console.log("no topthing");
 }
+
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 let thing = urlParams.get("s");
@@ -219,4 +220,33 @@ setTimeout(function () {
       });
     }
   });
-}, 500)
+}, 500);
+
+let old_domain_text = "https://maciejhub.github.io";
+let new_domain_text = "https://maciej.pub";
+
+if (window.location.origin == new_domain_text && localStorage.sessions < 1) {
+  console.log("Transferring data...")
+  window.addEventListener("message", function (e) {
+    if (e.origin == old_domain_text) {
+      let data = JSON.parse(e.data);
+      localStorage.clear();
+
+      for (const key in data) {
+        localStorage.setItem(key, data[key]);
+      }
+
+      if (localStorage.sessions < 1 || !localStorage.sessions) {
+        localStorage.setItem("sessions", 1)
+      } else {
+        createnewpopup("domainpopup", "maciej hub ma nową domenę! Teraz zamiast wchodzenia na stronę <a href='https://maciejhub.github.io'>maciejhub.github.io</a> to wchodzi się na <a href='https://maciej.pub'>maciej.pub</a>.", "")
+      }
+    }
+  });
+  let old_domain = document.createElement("iframe")
+  old_domain.width = "0px";
+  old_domain.height = "0px";
+  old_domain.style.border = "none";
+  old_domain.src = old_domain_text;
+  document.body.appendChild(old_domain);
+}

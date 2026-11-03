@@ -12,6 +12,13 @@ const ikons = {
       "type": "ikon"
     },
     {
+      "id": "pubikon",
+      "name": "Ikon z napisem maciej pub",
+      "icon": "/ikony/pubikon.png",
+      "price": "5",
+      "type": "ikon"
+    },
+    {
       "id": "bdikon",
       "name": "Ikon z okazji pierwszej rocznicy maciej hub",
       "icon": "/ikony/bdikon.png",
