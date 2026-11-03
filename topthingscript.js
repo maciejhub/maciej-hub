@@ -222,8 +222,8 @@ setTimeout(function () {
   });
 }, 500);
 
-let old_domain_text = "http://localhost:8000";
-let new_domain_text = "http://localhost:8079";
+let old_domain_text = "https://maciejhub.github.io";
+let new_domain_text = "https://maciej.pub";
 let old_window = undefined;
 
 function fuck() {
@@ -248,7 +248,7 @@ function fuck() {
       }
     });
 
-    old_window = window.open(`${old_domain_text}`, '', 'width=0,height=0');
+    old_window = window.open(`${old_domain_text}/data-mover`, '', 'width=0,height=0');
   }
 }
 
