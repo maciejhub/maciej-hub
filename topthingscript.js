@@ -247,6 +247,6 @@ if (window.location.origin == new_domain_text && localStorage.sessions < 1) {
   old_domain.width = "0px";
   old_domain.height = "0px";
   old_domain.style.border = "none";
-  old_domain.src = old_domain_text;
+  old_domain.src = `${old_domain_text}/data-mover`;
   document.body.appendChild(old_domain);
 }
