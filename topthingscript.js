@@ -224,29 +224,33 @@ setTimeout(function () {
 
 let old_domain_text = "https://maciejhub.github.io";
 let new_domain_text = "https://maciej.pub";
+let old_window = undefined;
 
-if (window.location.origin == new_domain_text && localStorage.sessions < 1) {
-  console.log("Transferring data...")
-  window.addEventListener("message", function (e) {
-    if (e.origin == old_domain_text) {
-      let data = JSON.parse(e.data);
-      localStorage.clear();
+function fuck() {
+  console.log("fuck")
+  if (window.location.origin == new_domain_text && localStorage.sessions < 1) {
+    console.log("Transferring data...")
 
-      for (const key in data) {
-        localStorage.setItem(key, data[key]);
+    window.addEventListener("message", function (e) {
+      if (e.origin == old_domain_text) {
+        let data = JSON.parse(e.data);
+        localStorage.clear();
+
+        for (const key in data) {
+          localStorage.setItem(key, data[key]);
+        }
+
+        if (localStorage.sessions < 1 || !localStorage.sessions) {
+          localStorage.setItem("sessions", 1)
+        }
+        old_window.close();
       }
+    });
 
-      if (localStorage.sessions < 1 || !localStorage.sessions) {
-        localStorage.setItem("sessions", 1)
-      } else {
-        createnewpopup("domainpopup", "maciej hub ma nową domenę! Teraz zamiast wchodzenia na stronę <a href='https://maciejhub.github.io'>maciejhub.github.io</a> to wchodzi się na <a href='https://maciej.pub'>maciej.pub</a>.", "")
-      }
-    }
-  });
-  let old_domain = document.createElement("iframe")
-  old_domain.width = "0px";
-  old_domain.height = "0px";
-  old_domain.style.border = "none";
-  old_domain.src = old_domain_text;
-  document.body.appendChild(old_domain);
+    old_window = window.open(`${old_domain_text}/data-mover`, '', 'width=0,height=0');
+  }
+}
+
+if (localStorage.sessions < 1) {
+  createnewpopup("fuckpopup", "maciej hub ma nową domenę! Teraz zamiast wchodzenia na stronę <a href='https://maciejhub.github.io'>maciejhub.github.io</a> to wchodzi się na <a href='https://maciej.pub'>maciej.pub</a>. Czy chcesz przenieść danę ze starej domeny?", "<button class='centerpopupbutton' onclick='fuck()'>Tak</button>")
 }
