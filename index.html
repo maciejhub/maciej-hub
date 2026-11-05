@@ -11,7 +11,7 @@
 <link rel="shortcut icon" href="/favicons/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="maciej hub" />
-<link rel="manifest" href="/favicons/site.webmanifest" />
+<link rel="manifest" href="manifest.json" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,8 +20,8 @@
     content="black-translucent">
     <meta content="maciej hub" property="og:title" />
 <meta content="Instrukcja na maciej hub" property="og:description" />
-<meta content="https://maciejhub.github.io/" property="og:url" />
-<meta content="https://maciejhub.github.io/ikon.png" property="og:image" />
+<meta content="https://maciej.pub/" property="og:url" />
+<meta content="https://maciej.pub/ikon.png" property="og:image" />
 <meta content="#222222" data-react-helmet="true" name="theme-color" />
   </head>
 <body>
@@ -30,13 +30,13 @@
     <hr style="margin-top: 5px; margin-bottom: -5px;" width="100%;" color="#38393f" size="3">
     <div style="min-height: 5em; display: flex; justify-content: center;">
     <div><h2><button style="margin: 1px;" id="button" class="button" onclick="clickbutton()"><b>Okej, rozumiem</b></button></h2></div>
-      <div style="margin: 15px;" id="button2"><button onclick="clickbutton2()" class="centerpopupbutton">I rozumiem że to też jest przycisk</button></div>
+      <div style="margin: 15px;" hidden id="button2"><button onclick="clickbutton2()" class="centerpopupbutton">I rozumiem że to też jest przycisk</button></div>
     </div>
       <hr style="margin-top: -5px;" width="100%;" color="#38393f" size="3">
     </div>
     <div class="center">
         <h2 style="display: none;" id="unofficialalarm"><b>Kod QR który został zeskanowany był pobrany z maciej hub</h2>
-    <h1>Instrukcja obsługi maciej hub</b></h1>
+    <h1>Instrukcja obsługi maciej hub</h1>
     <img src="/system/root/wideo/instrukcja.webp" width=300 alt="Filmik pokazujący o co chodzi" >
     <h1>Każdy biały napis z linią pod napisem to przycisk. Aby przejść dalej, przyciśnij przycisk "Okej, rozumiem". Wtedy się pokaże inny przycisk, ktory też jest do przyciskania</h1>
         </div>
@@ -47,11 +47,9 @@
         if (urlParams.get("gen") != undefined && urlParams.get("gen").includes("u")) {
           document.getElementById("unofficialalarm").style.display = "inline";
         }
-          document.getElementById("button2").style.display = "none";
-          document.getElementById("button").style.display = "inline-block";
         function clickbutton() {
           document.getElementById("button").style.display = "none";
-          document.getElementById("button2").style.display = "inline-block";
+          document.getElementById("button2").hidden = false;
         }
         function clickbutton2() {
           window.location.href = "wiersz";

@@ -1,8 +1,11 @@
 {
   "name": "maciej hub",
   "short_name": "maciej hub",
-  "start_url": "wiersz.html",
-  "scope": "./",
+  "start_url": "/mch_pwa_start",
+  "description": "Aplikacja maciej hub aby mieć szybszy dostęp do twojej ulubionej strony internetowej. Są dostępne ustawienia w różnych fajnych rzeczach, których nie ma na stronie.",
+  "version": "a1",
+  "id": "/mch_pwa_start",
+  "scope": "/",
   "icons": [
     {
       "src": "favicons/web-app-manifest-192x192.png",
@@ -17,5 +20,35 @@
   ],
   "theme_color": "#222222",
   "background_color": "#222222",
-  "display": "standalone"
+  "display": "standalone",
+  "screenshots": [
+    {
+      "src": "/favicons/narrow.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "maciej hub wiersz"
+    },
+    {
+      "src": "/favicons/wide.jpg",
+      "sizes": "1920x1080",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "maciej hub wiersz"
+    },
+    {
+      "src": "/favicons/narrow2.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "maciej hub gry"
+    },
+    {
+      "src": "/favicons/wide2.jpg",
+      "sizes": "1920x1080",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "maciej hub gry"
+    }
+  ]
 }

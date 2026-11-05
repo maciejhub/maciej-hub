@@ -43,7 +43,7 @@ let throbber = document.getElementById("throbber");
 let ok = document.getElementById("OK");
 let newest = document.getElementById("shownewest");
 let allMessages = ["Error"];
-fetch("allMessages.json", {
+fetch("/allMessages.json", {
 		cache: 'no-cache'
 	})
 	.then(response => response.text())

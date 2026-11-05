@@ -23,15 +23,21 @@ function createnewpopup(id, content, second_button, audio, style) {
   return popupnumber - 1
 }
 
-async function fetch_mch_file(link) {
-  fetch(link, {
-		cache: 'no-cache'
+async function fetch_mch_file(link, use_cache) {
+  let text = undefined;
+  if (!use_cache) {
+    use_cache = "no-cache";
+  }
+  await fetch(link, {
+    cache: use_cache
 	})
 	.then(response => response.text())
     .then(data => {
-      return data;
+      text = data;
 	})
     .catch(error => {
-      return error;
+      text = "Error";
+      console.log(error);
     });
+  return text;
 }

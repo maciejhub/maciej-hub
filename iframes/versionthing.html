@@ -44,7 +44,7 @@ let last = get("last");
 let help = get("help");
 let back = get("back")
 let allVersions = ["Error"];
-fetch("versions.json", {
+fetch("/versions.json", {
 		cache: 'no-cache'
 	})
 	.then(response => response.text())

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <meta charset="UTF-8">
+    <meta name="description" content="Witaj w mojej ultra sigma stronie">
+    <title>maciej hub</title>
+    <link href="/style2.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+<link rel="shortcut icon" href="/favicons/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="maciej hub" />
+<link rel="manifest" href="manifest.json" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<!-- possible content values: default, black or black-translucent -->
+<meta name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent">
+    <meta content="maciej hub" property="og:title" />
+<meta content="mch_pwa_start na maciej hub" property="og:description" />
+<meta content="https://maciej.pub/mch_pwa_start" property="og:url" />
+<meta content="https://maciej.pub/ikon.png" property="og:image" />
+<meta content="#222222" data-react-helmet="true" name="theme-color" />
+  </head>
+<body>
+<script src="/universal_functions.js?"></script>
+<script src="topthingscript.js?2"></script>
+<script>
+let pwa_settings = undefined;
+if (!localStorage.pwa_settings) {
+  let default_settings = {
+    "default_page": "/wiersz"
+  }
+  localStorage.setItem("pwa_settings", JSON.stringify(default_settings));
+}
+pwa_settings = JSON.parse(localStorage.pwa_settings)
+window.location.href = pwa_settings["default_page"];
+</script>
+</body>
+</html>

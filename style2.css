@@ -5,7 +5,7 @@
     font-style: normal;
 }
 
-.loader {
+.loader {  /* stolen from some site with spinners i forgot*/
   --color-1: #fff;
   --size: 1.32px;
   margin-top: 1em;
@@ -50,11 +50,29 @@
 
 button {
     font-family: "Roboto", Arial;
+    font-weight: normal;
 }
 
 div {
     font-family: "Roboto", Arial;
+    font-weight: normal;
 }
+
+h2 {
+    font-family: "Roboto", Arial;
+    font-weight: normal;
+}
+
+option {
+    font-family: "Roboto", Arial;
+    font-weight: normal;
+}
+
+select {
+    font-family: "Roboto", Arial;
+    font-weight: normal;
+}
+
 /* unvisited link */
 a:link {
     color: white;

@@ -1,5 +1,7 @@
 // universal script for everything
 
+let is_pwa = window.matchMedia('(display-mode: standalone)').matches;
+
 let path = window.location.pathname;
 window.parent.postMessage(window.location.pathname);
 let tokens2 = parseInt(localStorage.casinoTokens)
@@ -187,34 +189,28 @@ async function notification() {
 }
 nopermissionnotification();
 
-let allVersions = ["Nieznany error"]
-fetch("/versions.json", {
-		cache: 'no-cache'
-	})
-	.then(response => response.text())
-	.then(data => {
-		console.log("Setting allVersions")
-		allVersions = JSON.parse(data)
-	})
-	.catch(allVersions = ["Error, nie można wziąść wersji"]);
-
-
 setTimeout(function () {
-  document.querySelectorAll("iframe").forEach(function (iframe) {
+  document.querySelectorAll("iframe").forEach(async function (iframe) {
     if (iframe.src.includes("bottomthing")) {
+      let allVersions = JSON.parse(await fetch_mch_file("/versions.json"));
+      let manifest_ver = "";
+      if (is_pwa) {
+        manifest_ver = `${JSON.parse(await fetch_mch_file("/manifest.json", "force-cache"))["version"]}-`;
+      }
+
       iframe.height = iframe.scrollHeight + 150;
       iframe.style.overflow = "hidden";
       iframe.scrollable = "no";
       let frame_document = iframe.contentWindow.document
       let version_text = frame_document.getElementById("version_text")
       frame_document.getElementById("licenses").addEventListener("click", function () {
-        createnewpopup("licensepopup", `<iframe src='/licenses.html' width=600px scrolling='yes' id='versionthing' frameborder='0'></iframe>`, "", "false");
+        createnewpopup("licensepopup", `<iframe src='/iframes/licenses.html' width=600px scrolling='yes' id='versionthing' frameborder='0'></iframe>`, "", "false");
         get("licensepopup").querySelector("iframe").width = `${get("licensepopup").clientWidth}px`
         get("licensepopup").querySelector("iframe").height = `${get("licensepopup").querySelector("iframe").clientHeight + 75}px`
       });
-      version_text.innerText = `wersja ${allVersions[allVersions.length - 1].split(" ")[0]}`;
+      version_text.innerText = `wersja ${manifest_ver}${allVersions[allVersions.length - 1].split(" ")[0]}`;
       version_text.addEventListener("click", function () {
-        createnewpopup("versionpopup", "<iframe src='/versionthing' width=600px scrolling='yes' id='versionthing' frameborder='0'></iframe>", "");
+        createnewpopup("versionpopup", "<iframe src='/iframes/versionthing' width=600px scrolling='yes' id='versionthing' frameborder='0'></iframe>", "");
         get("versionpopup").querySelector("iframe").width = `${get("versionpopup").clientWidth}px`
         get("versionpopup").querySelector("iframe").height = `${get("versionpopup").querySelector("iframe").clientHeight + 15}px`
       });
@@ -253,4 +249,8 @@ function fuck() {
 
 if (!localStorage.movedData) {
   createnewpopup("fuck", "maciej hub ma nową domenę! Teraz zamiast <a href='https://maciejhub.github.io'>maciejhub.github.io</a> jest <a href='https://maciej.pub'>maciej.pub</a>. Czy chcesz przenieść danę ze starej domeny?", "<button class='centerpopupbutton' onclick='fuck()'>Tak</button>")
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js');
 }

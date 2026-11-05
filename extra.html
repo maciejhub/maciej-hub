@@ -10,8 +10,7 @@
 <link rel="shortcut icon" href="/favicons/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="maciej hub" />
-<link rel="manifest" href="/favicons/site.webmanifest" />
-<link rel="manifest" href="manifestnokia.json">
+<link rel="manifest" href="manifest.json">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -19,8 +18,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta content="maciej hub" property="og:title" />
 <meta content="Extra na maciej hub" property="og:description" />
-<meta content="https://maciejhub.github.io/extra" property="og:url" />
-<meta content="https://maciejhub.github.io/ikon.png" property="og:image" />
+<meta content="https://maciej.pub/extra" property="og:url" />
+<meta content="https://maciej.pub/ikon.png" property="og:image" />
 <meta content="#222222" data-react-helmet="true" name="theme-color" />
   </head>
 <body>
@@ -41,10 +40,10 @@
             <div id="sessioncounter" style="display: inline;">Tutaj powinno coś innego pisać</div>
             <div style="display: inline; font-size: 115%;" id="plus"></div>
         </div>
-        <button onclick="showqrs()" class="button"><b>Zobacz kody QR z maciej hub</b></button>
-        <h2><button onclick="notification()" id="notificationtext" class="button"><b>Włącz powiadomienia na nowe wiadomości</b></button></h2>
-        <h2><button onclick="showmessages()" class="button"><b>Zobacz nowe wiadomości</b></button></h2>
-        <!--<h2><button onclick="connect()" id="serwertest" class="button"><b>Połącz z serwerem</b></button></h2>-->
+        <h2><button id="app" class="button">Pobierz aplikację maciej hub</button></h2>
+        <h2><button onclick="showqrs()" class="button">Zobacz kody QR z maciej hub</button></h2>
+        <h2><button onclick="notification()" id="notificationtext" class="button">Włącz powiadomienia na nowe wiadomości</button></h2>
+        <h2><button onclick="showmessages()" class="button">Zobacz nowe wiadomości</button></h2>
         <h2>
             <a href='r/kahoot' target='_blank'>Kahoot</a> i <a href='r/blooket' target='_blank'>Blooket</a> z maciej hub<br><br>
             <a href="camera">maciej hub gry na kamerze</a><br><br>
@@ -56,29 +55,16 @@
     </div>
 <script src="/universal_functions.js?"></script>
 <script src="topthingscript.js?2"></script>
+<script src="https://unpkg.com/bowser@2/es5.js"></script>
 <script>
 document.getElementById("messagepopup").style.display = "none";
+
 function sleep(ms) { // stolen
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function connect() {
-  if (localStorage.previousSessions == localStorage.sessions) {
-
-  }
-  fetch("", {
-		cache: 'no-cache'
-	})
-	.then(response => response.text())
-	.then(data => {
-	console.log(data)
-	document.getElementById("serwertest").innerHTML = `To jest ${data} wizyta maciej hub!`
-	})
-	.catch(error => document.getElementById("serwertest").innerHTML = `<b>Serwer zepsuty pewnie wyłączony</b>`);
-}
-
-if (Notification?.permission == "granted") {
-  document.getElementById("notificationtext").innerHTML = "<b>Włącz powiadomienia na nowe wiadomości (Włączone)</b>";
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js');
 }
 
 async function animation() {
@@ -103,38 +89,85 @@ if (difference > 0) {
   animation();
 }
 
-function deletelocalstorage() {
-  localStorage.clear();
-}
 function showunrelated() {
   document.getElementById("unrelated").style.display = "initial";
   document.getElementById("showtext").style.display = "none";
 }
+
 function hidemessages() {
   document.getElementById("messagepopup").style.height = "30%";
   document.getElementById("messages").innerHTML = "";
   document.getElementById("messagepopup").style.display = "none";
 }
+
 window.addEventListener("message", (event) => {
   if (event.data == "OK") {
     hidemessages();
   }
 });
+
 function showqrs() {
   document.getElementById("messagepopup").style.height = "35%";
   document.getElementById("messagepopup").style.display = "inline";
   let heightOfParent = (document.getElementById("messagepopup").clientHeight * 0.9) + "px";
-  document.getElementById("messages").innerHTML = "<iframe src='qrthing' width='90%' height='" + heightOfParent + "' scrolling='yes' id='qrthing' frameborder='0'></iframe>";
+  document.getElementById("messages").innerHTML = "<iframe src='/iframes/qrthing' width='90%' height='" + heightOfParent + "' scrolling='yes' id='qrthing' frameborder='0'></iframe>";
 }
+
 function showversions() {
   document.getElementById("messagepopup").style.display = "inline";
   let heightOfParent = (document.getElementById("messagepopup").clientHeight * 0.8) + "px";
-  document.getElementById("messages").innerHTML = "<iframe src='versionthing' width='90%' height='" + heightOfParent + "' scrolling='yes' id='versionthing' frameborder='0'></iframe>";
+  document.getElementById("messages").innerHTML = "<iframe src='/iframes/versionthing' width='90%' height='" + heightOfParent + "' scrolling='yes' id='versionthing' frameborder='0'></iframe>";
 }
+
 function showmessages() {
   document.getElementById("messagepopup").style.display = "inline";
   let heightOfParent = (document.getElementById("messagepopup").clientHeight * 0.8) + "px";
-  document.getElementById("messages").innerHTML = "<iframe src='globalmessage' width='90%' height='" + heightOfParent + "' scrolling='yes' id='messagess' frameborder='0'></iframe>";
+  document.getElementById("messages").innerHTML = "<iframe src='/iframes/globalmessage' width='90%' height='" + heightOfParent + "' scrolling='yes' id='messagess' frameborder='0'></iframe>";
+}
+
+let install_prompt = undefined;
+let pwa_prompt_supported = false;
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  get("app").hidden = true;
+  install_prompt = event;
+  pwa_prompt_supported = true;
+});
+
+get("app").addEventListener("click", function () {
+  if (is_pwa) {
+    createnewpopup("apppopup", "<iframe src='/iframes/app_settings.html' scrolling='yes' frameborder='0'></iframe>", "");
+  } else {
+    if (pwa_prompt_supported) {
+      install_prompt.prompt();
+    } else {
+      createnewpopup("apppopup", "<iframe src='/iframes/app_settings.html' scrolling='yes' frameborder='0'></iframe>", "");
+      get("apppopup")
+    }
+  }
+
+  let frame = get("apppopup").querySelector("iframe")
+  frame.addEventListener("load", function () {
+    console.log(`${frame.contentWindow.document.body.scrollHeight} vs ${frame.clientHeight}`);
+    let height = frame.contentWindow.document.body.scrollHeight + 100;
+    if (height > window.innerHeight * 0.7) {
+      height = window.innerHeight * 0.7;
+    }
+    get("apppopup").style.height = `${height}px`;
+    frame.style.height = `${height - 100}px`;
+    frame.style.width = `${get("apppopup").clientWidth}px`;
+  });
+
+});
+
+if (is_pwa) {
+  get("app").innerText = "Zmień ustawienia aplikacji";
+}
+
+if (Notification) {
+  if (Notification?.permission == "granted") {
+    document.getElementById("notificationtext").innerHTML = "Włącz powiadomienia na nowe wiadomości (Włączone)";
+  }
 }
 </script>
 <iframe src="bottomthing" height="200px" frameborder="0" width="100%"></iframe>

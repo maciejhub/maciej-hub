@@ -16,9 +16,11 @@ document.querySelectorAll("iframe").forEach(function (frame) {
   }
   if (screen.orientation.type.includes("landscape")) {
     frame.width = "480px";
+    frame.contentWindow.location.reload();
   } else {
     frame.width = "90%";
   }
+
   frame.addEventListener("load", function () {
     frame.height = `${frame.contentWindow.document.body.scrollHeight + 50}px`;
   });
@@ -50,7 +52,8 @@ if (shared != null) {
         document.getElementById("mandarynki").style.display = "none";
         document.getElementById("asmrbulka").style.display = "none";
         document.getElementById("nokiatycoon").style.display = "none";
-        document.getElementById("kart").style.display = "none";
+      document.getElementById("kart").style.display = "none";
+      document.getElementById("zntr").style.display = "none";
         document.getElementById(shared).style.display = "initial";
     }
 }
@@ -75,7 +78,10 @@ function showall() {
     document.getElementById("zepsucnokie").style.display = "initial";
     document.getElementById("mandarynki").style.display = "initial";
     document.getElementById("asmrbulka").style.display = "initial";
-    document.getElementById("nokiatycoon").style.display = "initial";
+  document.getElementById("nokiatycoon").style.display = "initial";
+  document.getElementById("zntr").style.display = "initial";
+  sorting = 3;
+  changesorting();
     document.getElementById("showallbutton").style.display = "none";
 }
 
@@ -98,18 +104,9 @@ function showcode() {
 }
 
 let shareurl = "mangos";
-if (document.getElementById("sharechoose").value == "all") {
-    shareurl = "https://maciejhub.github.io/gry";
-} else {
-    shareurl = "https://maciejhub.github.io/gry?share=" + document.getElementById("sharechoose").value;
-}
 
 async function copylink() {
-    if (document.getElementById("sharechoose").value == "all") {
-        shareurl = window.location.origin + "/gry?share=all";
-    } else {
-        shareurl = window.location.origin + "/gry?share=" + document.getElementById("sharechoose").value;
-    }
+    shareurl = window.location.origin + "/gry/?share=" + document.getElementById("sharechoose").value;
     navigator.clipboard.writeText(shareurl);
     document.getElementById("copytext").innerHTML = "Link zkopiowany!";
     await sleep(700);

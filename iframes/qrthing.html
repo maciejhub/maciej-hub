@@ -47,7 +47,7 @@ let next = document.getElementById("next");
 let download = document.getElementById("download");
 let downloadpage = document.getElementById("downloadpage");
 let allCodeData = ["Error, nie można wziąść kodów"];
-fetch("codeData.json", {
+fetch("/codeData.json", {
 		cache: 'no-cache'
 	})
 	.then(response => response.text())
@@ -67,7 +67,7 @@ async function nextcode() {
     code = 0;
   }
   const codeData = allCodeData[code].split("-");
-  image.src = "codes/singular/" + codeData[1];
+  image.src = "/codes/singular/" + codeData[1];
   if (codeData[1] == "card.png") {
     image.width = 280;
   } else {
@@ -78,7 +78,7 @@ function downloadcode(amount) {
   const link = document.createElement("a");
   const codeData = allCodeData[code].split("-")
   link.download = codeData[0] + " z maciej hub";
-  link.href = "codes/" + amount + "/" + codeData[1];
+  link.href = "/codes/" + amount + "/" + codeData[1];
   link.click();
   link.remove();
   console.log("Downloading " + amount + " of " + codeData[1]);
