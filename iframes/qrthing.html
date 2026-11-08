@@ -7,11 +7,10 @@
     <meta name="description" content="Witaj w mojej ultra sigma stronie">
     <title>maciej hub</title>
   <link rel="icon" type="image/x-icon" href="/ikon.png">
-    <link href="/style2.css" rel="stylesheet" type="text/css" media="all">
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
     <style>
         body {
             background-color: transparent;
-            zoom: 100%;
         }
         .thing {
             overflow: scroll;
@@ -29,7 +28,6 @@
     <div id="content" class="thing">
         <div class="loader" id="throbber"></div>
         <h2><img src="" id="image" width="160"></h2>
-        <button id="OK" style="display: none;" class="centerpopupbutton" onclick="hidetext()">Zamknij</button>
         <button id="next" style="display: none;" class="centerpopupbutton" onclick="nextcode()">Następny kod</button>
         <button id="download" style="display: none;" class="centerpopupbutton" onclick="downloadcode('singular')">Pobierz jeden kod</button>
         <button id="downloadpage" style="display: none;" class="centerpopupbutton" onclick="downloadcode('pages')">Pobierz całą stronę A4 tego kodu</button>
@@ -42,7 +40,6 @@ let code = -1;
 let content = document.getElementById("content");
 let image = document.getElementById("image");
 let throbber = document.getElementById("throbber");
-let ok = document.getElementById("OK");
 let next = document.getElementById("next");
 let download = document.getElementById("download");
 let downloadpage = document.getElementById("downloadpage");
@@ -87,7 +84,6 @@ async function restOfTheScript() {
 	await sleep(500);
 	nextcode();
 	throbber.style.display = "none";
-    ok.style.display = "inline";
     image.style.display = "inline";
     next.style.display = "inline";
     download.style.display = "inline";

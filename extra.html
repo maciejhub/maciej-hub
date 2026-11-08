@@ -116,6 +116,7 @@ window.addEventListener("message", (event) => {
 function showqrs() {
   createnewpopup("extrapopup", "<iframe src='/iframes/qrthing' scrolling='yes' frameborder='0'></iframe>", "");
   get("extrapopup").querySelector("iframe").style.width = `${get("extrapopup").clientWidth}px`;
+  get("extrapopup").querySelector("iframe").style.height = `20rem`;
 }
 
 function showversions() {
@@ -159,6 +160,10 @@ get("app").addEventListener("click", function () {
     let height = frame.contentWindow.document.body.scrollHeight + 100;
     if (height > window.innerHeight * 0.7) {
       height = window.innerHeight * 0.7;
+    }
+    if (height < 150) {
+      get(`closepopupbutton${popupnumber}`).style.marginBottom = "3rem";
+      get(`closepopupbutton${popupnumber}`).style.marginTop = "-2rem";
     }
     get("extrapopup").style.height = `${height}px`;
     frame.style.height = `${height - 82}px`;

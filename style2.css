@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Roboto";
-    src: url("Roboto-Bold.woff2") format("woff2");
+    src: url("/Roboto-Bold.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
 }
@@ -19,7 +19,7 @@
   animation: rotation 1s linear infinite;
 }
 
-@keyframes rotation {
+@keyframes rotation { /* this is for the loader */
   0% {
     transform: rotate(0deg);
   }
@@ -394,7 +394,8 @@ img.custom:active {
     color: #ffffff;
     border: 7px solid #191919;
     z-index: 2;
-    bottom: 20px;
+    margin-bottom: 0.2rem;
+    bottom: 15px;
     cursor: pointer;
 }
 

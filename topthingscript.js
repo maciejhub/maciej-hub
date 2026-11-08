@@ -1,7 +1,13 @@
 // universal script for everything
 
-let is_pwa = window.matchMedia('(display-mode: standalone)').matches;
 let rem = parseInt(getComputedStyle(document.documentElement).fontSize);
+
+const display_mode = window.matchMedia('(display-mode: standalone)');
+let is_pwa = display_mode.matches;
+
+display_mode.addEventListener('change', function () {
+  window.location.reload();
+});
 
 let path = window.location.pathname;
 window.parent.postMessage(window.location.pathname);
