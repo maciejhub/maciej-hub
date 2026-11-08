@@ -294,13 +294,14 @@ function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) { // 
 function renderfile(type, name, link) {
   let newfile = get("basefile").cloneNode(true);
   let format = "idk";
+  let width = "4.8rem"
   newfile.querySelector("button").style.display = "flex";
   newfile.querySelector("h2").innerText = name;
   newfile.id = "basefile2"
   if (type == "folder") {
     newfile.querySelector("img").src = "folder.png"
-    newfile.querySelector("img").style.width = "5rem";
-    newfile.querySelector("img").style.height = "5rem";
+    newfile.querySelector("img").style.width = width;
+    newfile.querySelector("img").style.height = width;
     if (name == "Wstecz") {
       newfile.querySelector("img").src = "back.png"
     }
@@ -317,7 +318,6 @@ function renderfile(type, name, link) {
     if (link.includes("custom")) {
       format = "custom";
     }
-    let width = "4.8rem"
     if (format == "image" && !link.includes("instrukcja.webp")) {
       newfile.querySelector("img").src = `${link}`;
       newfile.querySelector("img").style.display = "none";
