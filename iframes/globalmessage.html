@@ -31,7 +31,6 @@
     <div id="content" class="thing">
         <div class="loader" id="throbber"></div>
         <h2><div id="text"></div></h2>
-        <button id="OK" style="display: none;" class="centerpopupbutton" onclick="hidetext()">Zamknij</button>
         <button id="shownewest" style="display: none;" class="centerpopupbutton" onclick="showall()">Zobacz wszystkie wiadomości</button>
     </div>
     <script>
@@ -40,7 +39,6 @@ function sleep(ms) {
 }
 let text = document.getElementById("text");
 let throbber = document.getElementById("throbber");
-let ok = document.getElementById("OK");
 let newest = document.getElementById("shownewest");
 let allMessages = ["Error"];
 fetch("/allMessages.json", {
@@ -76,12 +74,10 @@ async function restOfTheScript() {
 	numberOfLastRead = allMessages.indexOf(localStorage.lastMessageRead);
 	await sleep(900);
 	if (allMessages[allMessages.length - 1] == localStorage.lastMessageRead) {
-		ok.style.display = "inline";
 		newest.style.display = "inline";
 		throbber.style.display = "none";
 		text.innerHTML = "Nie masz żadnych nowych wiadomości";
 	} else {
-		ok.style.display = "inline";
 		newest.style.display = "inline";
 		throbber.style.display = "none";
 		//if ((allMessages.length - numberOfLastRead > 1) == false) {

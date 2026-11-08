@@ -34,8 +34,10 @@
         color: white;
         font-family: "Roboto", Arial;
         vertical-align: middle;
-        margin: 20px;
-        zoom: 125%;
+        font-size: 17px;
+    }
+    html {
+        font-size: 17px;
     }
 }
 @media (orientation: portrait) {
@@ -44,9 +46,13 @@
         color: white;
         font-family: "Roboto", Arial;
         vertical-align: middle;
-        margin: 20px;
+        font-size: 14px;
+    }
+    html {
+        font-size: 14px;
     }
 }
+
 
 button {
     font-family: "Roboto", Arial;
@@ -61,6 +67,7 @@ div {
 h2 {
     font-family: "Roboto", Arial;
     font-weight: normal;
+    font-size: 2rem;
 }
 
 option {
@@ -119,9 +126,9 @@ a:visited {
     text-decoration: underline;
     display: inline-block;
     cursor: pointer;
-    font-size: 23px;
     margin: -2px;
-    padding: 5px;
+    padding: 0.25rem;
+    font-size: inherit;
 }
 .buttonnounderline {
     background-color: transparent; /* Green */
@@ -255,42 +262,13 @@ img.custom:active {
     bottom: 5px;
     border: 0;
 }
+
+.linebreak {
+    margin-bottom: 1em;
+}
+
 @media (orientation: portrait) {
-    .casinoitems {
-        background-color: #292929;
-        padding: 5px;
-        font-size: 15px;
-        color: #ffffff;
-        border: 7px solid #191919;
-        bottom: 20px;
-        cursor: pointer;
-        width: 110%;
-        height: 40vw;
-        max-height: 200px;
-        line-height: 150%;
-    }
-    .AAA {
-        font-size: 16px;
-    }
-    .AAAA {
-        font-size: 15px;
-    }
-    .casinocenterpopup {
-        background-color: #292929;
-        width: 60%;
-        padding: 15px;
-        font-size: 25px;
-        z-index: 3; /* Specify a stack order in case you're using a different order for other elements */
-        position: fixed; /* Sit on top of the page content */
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border: 10px solid #191919;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
+
     .row {
         display: inline;
     }
@@ -298,7 +276,7 @@ img.custom:active {
         background-color: #292929;
         width: 70%;
         padding: 15px;
-        font-size: 25px;
+        font-size: 1.5rem;
         z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
         position: fixed; /* Sit on top of the page content */
         top: 50%;
@@ -376,41 +354,7 @@ img.custom:active {
         justify-content: center;
         text-align: center;
     }
-    .casinoitems {
-        background-color: #292929;
-        padding: 5px;
-        font-size: 25px;
-        color: #ffffff;
-        border: 7px solid #191919;
-        bottom: 20px;
-        cursor: pointer;
-        width: 100%;
-        height: 30vw;
-        max-height: 200px;
-        line-height: 150%;
-    }
-    .AAA {
-        font-size: 20px;
-    }
-    .AAAA {
-        font-size: 20px;
-    }
-    .casinocenterpopup {
-        background-color: #292929;
-        width: 25%;
-        padding: 15px;
-        font-size: 25px;
-        z-index: 3; /* Specify a stack order in case you're using a different order for other elements */
-        position: fixed; /* Sit on top of the page content */
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border: 10px solid #191919;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
+
     .row {
         display: flex;
         flex-wrap: wrap;
@@ -420,8 +364,8 @@ img.custom:active {
     .centerpopup {
         background-color: #292929;
         width: 40%;
-        padding: 15px;
-        font-size: 25px;
+        padding: 0.75rem;
+        font-size: 2rem;
         z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
         position: fixed; /* Sit on top of the page content */
         top: 50%;
@@ -446,24 +390,14 @@ img.custom:active {
 .centerpopupbutton {
     background-color: #292929;
     padding: 5px;
-    font-size: 20px;
+    font-size: 1.5rem;
     color: #ffffff;
     border: 7px solid #191919;
     z-index: 2;
     bottom: 20px;
     cursor: pointer;
 }
-.questbutton {
-    background-color: #292929;
-    padding: 5px;
-    font-size: 20px;
-    width: 93%;
-    color: #ffffff;
-    border: 7px solid #191919;
-    bottom: 20px;
-    cursor: pointer;
-    text-align: left;
-}
+
 .exitspeedrun {
     background-color: #292929;
     font-size: 25px;
@@ -479,27 +413,4 @@ img.custom:active {
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-
-.whitecontainer {
-    background-color: transparent;
-    display: inline-block;
-    position: relative;
-}
-
-.whitecontainer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 7px solid white;
-    box-sizing: border-box;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.whitecontainer img {
-    position: relative;
 }

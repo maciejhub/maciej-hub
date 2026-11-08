@@ -22,7 +22,7 @@
         <link rel="manifest" href="/manifest.json" />
         <meta
             name="viewport"
-            content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+            content="width=device-width, initial-scale=1.0"
         />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,11 +33,8 @@
         />
         <meta content="maciej hub" property="og:title" />
         <meta content="Gry na maciej hub" property="og:description" />
-        <meta content="https://maciejhub.github.io/gry" property="og:url" />
-        <meta
-            content="https://maciejhub.github.io/ikony/ikon.png"
-            property="og:image"
-        />
+        <meta content="https://maciej.pub/gry" property="og:url" />
+        <meta content="https://maciej.pub/ikon.png" property="og:image"/>
         <meta content="#222222" data-react-helmet="true" name="theme-color" />
     </head>
     <body>
@@ -48,6 +45,7 @@
                 <hr width="100%;" color="#38393f" size="3" />
             </div>
         </div>
+        <div class="linebreak"></div>
         <div class="centerpopup" id="popup">
             <div id="sharepopup">
                 <div class="center">
@@ -94,7 +92,7 @@
             document.getElementById("popup").style.display = "none";
         </script>
         <div class="center">
-            <div id="code_field" style="display: none; margin-bottom: 2em; flex-direction: row;">
+            <div id="code_field" style="display: none; margin-bottom: 2em; margin-top: 0.5em; flex-direction: row;">
                 <input
                     id="codeinput"
                     type="search"

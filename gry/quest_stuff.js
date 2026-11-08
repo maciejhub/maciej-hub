@@ -29,7 +29,7 @@ let code_field = undefined;
 if (id_to_id(localStorage.quest)) {
   code_field = get("code_field").cloneNode(true);
   quest_element.addEventListener("load", function () {
-    let iframe_width = quest_element.contentWindow.document.body.scrollWidth;
+    let iframe_width = quest_element.contentWindow.document.body.clientWidth - 2 * rem;
     quest_element.parentElement.appendChild(code_field);
     quest_element.parentElement.style.display = "flex";
     quest_element.parentElement.style.alignItems = "center";
@@ -60,12 +60,9 @@ async function checkcode() {
   let dates = new Date();
   let hour = dates.getHours().toString().padStart(2, "0").toString();
   let date = dates.getDate().toString().padStart(2, "0").toString();
+  console.log(code)
 
-  console.log(hour);
-  console.log(date);
-
-  let offset = parseInt(code.substring(0, 1));
-  console.log(offset);
+  let offset = Number(code.substring(0, 1));
 
   if (isNaN(offset) || isNumber(code.substring(1, 2)) || isNumber(code.substring(3, 4)) || !isNumber(code.substring(2, 3)) || !isNumber(code.substring(4, 5))) {
     code_field.querySelector("input").value = "";

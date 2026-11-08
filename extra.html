@@ -21,6 +21,11 @@
 <meta content="https://maciej.pub/extra" property="og:url" />
 <meta content="https://maciej.pub/ikon.png" property="og:image" />
 <meta content="#222222" data-react-helmet="true" name="theme-color" />
+<style>
+.linebreak {
+    margin-bottom: 1em;
+}
+</style>
   </head>
 <body>
 <div id="topthing">
@@ -29,35 +34,37 @@
     <hr width="100%;" color="#38393f" size="3">
     <hr width="100%;" color="#38393f" size="3">
     </div>
-    </div>
-    <div class="centerpopup" style="height: 30%; width: 80%; display: none;" id="messagepopup">
-      <div id="messages"></div>
-     <div class="center">
 </div>
-    </div>
+<div class="linebreak"></div><div class="linebreak"></div>
     <div class="center">
-        <div style="margin-bottom: 0.6em; font-size: 2em;">
+        <div style="margin-bottom: 0.6em; font-size: 2.3rem;">
             <div id="sessioncounter" style="display: inline;">Tutaj powinno coś innego pisać</div>
             <div style="display: inline; font-size: 115%;" id="plus"></div>
         </div>
-        <h2><button id="app" class="button">Pobierz aplikację maciej hub</button></h2>
-        <h2><button onclick="showqrs()" class="button">Zobacz kody QR z maciej hub</button></h2>
-        <h2><button onclick="notification()" id="notificationtext" class="button">Włącz powiadomienia na nowe wiadomości</button></h2>
-        <h2><button onclick="showmessages()" class="button">Zobacz nowe wiadomości</button></h2>
-        <h2>
-            <a href='r/kahoot' target='_blank'>Kahoot</a> i <a href='r/blooket' target='_blank'>Blooket</a> z maciej hub<br><br>
-            <a href="camera">maciej hub gry na kamerze</a><br><br>
-            <a href="speedrun">maciej hub speedrun</a><br><br>
-            <a href="znnhd">zepsuć nokie SIMULATOR HD (nie działają tu misję)</a><br><br>
-        <a href="cytaty">
-            cytaty o życiu (na polski)
-        </a>
+        <div style="font-size: 1.8rem;">
+            <button id="app" class="button">Pobierz aplikację maciej hub</button>
+            <div class="linebreak"></div>
+            <button onclick="showqrs()" class="button">Zobacz kody QR z maciej hub</button>
+            <div class="linebreak"></div>
+            <button onclick="notification()" id="notificationtext" class="button">Włącz powiadomienia na nowe wiadomości</button>
+            <div class="linebreak"></div>
+            <button onclick="showmessages()" class="button">Zobacz nowe wiadomości</button>
+            <div class="linebreak"></div>
+            <a href='r/kahoot' target='_blank'>Kahoot</a> i <a href='r/blooket' target='_blank'>Blooket</a> z maciej hub
+            <div class="linebreak"></div>
+            <a href="camera">maciej hub gry na kamerze</a>
+            <div class="linebreak"></div>
+            <a href="speedrun">maciej hub speedrun</a>
+            <div class="linebreak"></div>
+            <a href="znnhd">zepsuć nokie SIMULATOR HD (nie działają tu misję)</a>
+            <div class="linebreak"></div>
+            <a href="cytaty">cytaty o życiu (na polski)</a>
+        </div>
     </div>
 <script src="/universal_functions.js?"></script>
 <script src="topthingscript.js?2"></script>
 <script src="https://unpkg.com/bowser@2/es5.js"></script>
 <script>
-document.getElementById("messagepopup").style.display = "none";
 
 function sleep(ms) { // stolen
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -107,22 +114,18 @@ window.addEventListener("message", (event) => {
 });
 
 function showqrs() {
-  document.getElementById("messagepopup").style.height = "35%";
-  document.getElementById("messagepopup").style.display = "inline";
-  let heightOfParent = (document.getElementById("messagepopup").clientHeight * 0.9) + "px";
-  document.getElementById("messages").innerHTML = "<iframe src='/iframes/qrthing' width='90%' height='" + heightOfParent + "' scrolling='yes' id='qrthing' frameborder='0'></iframe>";
+  createnewpopup("extrapopup", "<iframe src='/iframes/qrthing' scrolling='yes' frameborder='0'></iframe>", "");
+  get("extrapopup").querySelector("iframe").style.width = `${get("extrapopup").clientWidth}px`;
 }
 
 function showversions() {
-  document.getElementById("messagepopup").style.display = "inline";
-  let heightOfParent = (document.getElementById("messagepopup").clientHeight * 0.8) + "px";
-  document.getElementById("messages").innerHTML = "<iframe src='/iframes/versionthing' width='90%' height='" + heightOfParent + "' scrolling='yes' id='versionthing' frameborder='0'></iframe>";
+  createnewpopup("extrapopup", "<iframe src='/iframes/versionthing' scrolling='yes' frameborder='0'></iframe>", "");
+  get("extrapopup").querySelector("iframe").style.width = `${get("extrapopup").clientWidth}px`;
 }
 
 function showmessages() {
-  document.getElementById("messagepopup").style.display = "inline";
-  let heightOfParent = (document.getElementById("messagepopup").clientHeight * 0.8) + "px";
-  document.getElementById("messages").innerHTML = "<iframe src='/iframes/globalmessage' width='90%' height='" + heightOfParent + "' scrolling='yes' id='messagess' frameborder='0'></iframe>";
+  createnewpopup("extrapopup", "<iframe src='/iframes/globalmessage' scrolling='yes' frameborder='0'></iframe>", "");
+  get("extrapopup").querySelector("iframe").style.width = `${get("extrapopup").clientWidth}px`;
 }
 
 let install_prompt = undefined;
@@ -135,27 +138,31 @@ window.addEventListener("beforeinstallprompt", (event) => {
 });
 
 get("app").addEventListener("click", function () {
+  let popupnumber = undefined;
   if (is_pwa) {
-    createnewpopup("apppopup", "<iframe src='/iframes/app_settings.html' scrolling='yes' frameborder='0'></iframe>", "");
+    popupnumber = createnewpopup("extrapopup", "<iframe src='/iframes/app_settings.html' scrolling='yes' frameborder='0'></iframe>", "");
+    get("extrapopup").querySelector("iframe").style.width = `${get("extrapopup").clientWidth * 0.9}px`;
   } else {
     if (pwa_prompt_supported) {
       install_prompt.prompt();
     } else {
-      createnewpopup("apppopup", "<iframe src='/iframes/app_settings.html' scrolling='yes' frameborder='0'></iframe>", "");
-      get("apppopup")
+      popupnumber = createnewpopup("extrapopup", "<iframe src='/iframes/app_settings.html' scrolling='yes' frameborder='0'></iframe>", "");
+      get("extrapopup").querySelector("iframe").style.width = `${get("extrapopup").clientWidth * 0.9}px`;
     }
   }
+  get(`closepopupbutton${popupnumber}`).style.marginBottom = "2rem";
+  //get(`closepopupbutton${popupnumber}`).style.marginTop = "-2rem";
 
-  let frame = get("apppopup").querySelector("iframe")
+  let frame = get("extrapopup").querySelector("iframe")
   frame.addEventListener("load", function () {
     console.log(`${frame.contentWindow.document.body.scrollHeight} vs ${frame.clientHeight}`);
     let height = frame.contentWindow.document.body.scrollHeight + 100;
     if (height > window.innerHeight * 0.7) {
       height = window.innerHeight * 0.7;
     }
-    get("apppopup").style.height = `${height}px`;
-    frame.style.height = `${height - 100}px`;
-    frame.style.width = `${get("apppopup").clientWidth}px`;
+    get("extrapopup").style.height = `${height}px`;
+    frame.style.height = `${height - 82}px`;
+    frame.style.width = `${get("extrapopup").clientWidth}px`;
   });
 
 });

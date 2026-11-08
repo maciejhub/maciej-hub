@@ -321,7 +321,7 @@ const file_system =
         {
           "name": "The Bosses",
           "type": "file",
-          "contents": "custom|root/wazne/bosses.webp|Graj w <a target=_blank href='https://bosses.page.link/video_pr1'>The Bosses</a>"
+          "contents": "custom|root/wazne/bosses.webp|Graj w <a target=_blank href='https://bosses.page.link/video_pr1'>The Bosses</a><br><div style='font-size: 0.45em'>UWAGA: najnowsza wersja The Bosses zawiera treść wygenerowaną z AI. Jeżeli chcesz lepszy The Bosses, znajdź na internecie wersję gry 2.3.0.</div>"
         },
         {
           "name": "Jak zarabiać kasę.txt",

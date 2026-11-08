@@ -2,7 +2,7 @@ let quests = {
   stuff: [
     {
       "id": "S",
-      "name": "Dostań mniej niż 1 sekunde 5 razy w maciej hub speedrun",
+      "name": "Dostań mniej niż 1 sekundę 5 razy w maciej hub speedrun",
       "tokens": "3"
     },
     {

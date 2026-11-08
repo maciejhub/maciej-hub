@@ -153,7 +153,7 @@ async function checkformatch() {
     matches = [];
     for (let i = 0; i < 9; i++) {
         if (globalrolls[1 + i] == globalrolls[2 + i]) {
-           // console.log(`Found h match at ${1 + i} and ${2 + i}`);2
+           // console.log(`Found h match at ${1 + i} and ${2 + i}`);
             if (i != 2 && i != 5) {
                 addtokens += 1;
                 matches.push(`${1 + i},${2 + i}`)
@@ -224,11 +224,11 @@ function again() {
             if (i == 3 || i == 6 || i == 9) {
                 const randomgetter = getRandomInt(8) + 1;
                 rolls.push(randomgetter);
-                document.getElementById("mythingdingle").innerHTML += `<br><span style="width: 50px; height: 50px; margin-left: 5px; margin-right: 5px;" id='item${i}'><img width=50 src=kasynozdjecie/${randomgetter}.png></span>`;
+                document.getElementById("mythingdingle").innerHTML += `<br><span style="width: rem; margin-left: 0.25rem; margin-right: 0.25rem;" id='item${i}'><img style='width: 4rem;' src=kasynozdjecie/${randomgetter}.png></span>`;
             } else {
                 const randomgetter = getRandomInt(8) + 1;
                 rolls.push(randomgetter);
-                document.getElementById("mythingdingle").innerHTML += `<span style="width: 50px; height: 50px; margin-left: 5px; margin-right: 5px;" id='item${i}'><img width=50 src=kasynozdjecie/${randomgetter}.png></span>`;
+                document.getElementById("mythingdingle").innerHTML += `<span style="width: 4rem; margin-left: 0.25rem; margin-right: 0.25rem;" id='item${i}'><img style='width: 4rem;' src=kasynozdjecie/${randomgetter}.png></span>`;
             }
         }
         globalrolls = rolls;
@@ -247,9 +247,9 @@ function awesomeanimation() {
         let html = "";
         for (let i = 0; i < 9; i++) {
             if (i == 3 || i == 6 || i == 9) {
-              html += "<br><img width=50 src=kasynozdjecie/" + randomgetter + ".png>" + " ";
+              html += "<br><img style='width: 4rem;' src=kasynozdjecie/" + randomgetter + ".png>" + " ";
             } else {
-              html += "<img width=50 src=kasynozdjecie/" + randomgetter + ".png>" + " ";
+              html += "<img style='width: 4rem;' src=kasynozdjecie/" + randomgetter + ".png>" + " ";
             }
         }
         get("mythingdingle").innerHTML = html

@@ -3,18 +3,38 @@
     src: url("/Roboto-Bold.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
+    white-space: normal;
+}
+
+@media (orientation: landscape) {
+    html {
+        font-size: 17px;
+    }
+    img {
+        width: 300px;
+    }
+}
+@media (orientation: portrait) {
+    html {
+        font-size: 14px;
+    }
+    img {
+        width: 240px;
+    }
 }
 
 body {
     background-color: transparent;
     color: white;
     font-family: "Roboto";
-    vertical-align: middle;
-    margin: 20px;
+    min-width: 100%;
+    margin: 0;
 }
+
 .center {
     text-align: center;
 }
+
 .buttonnounderline {
     background-color: transparent; /* Green */
     border: none;
@@ -23,8 +43,7 @@ body {
     display: inline-block;
     cursor: pointer;
     font-family: "Roboto";
-    font-size: 23px;
-    margin: -2px;
+    font-size: 2rem;
     padding: 5px;
 }
 .playbutton {
@@ -34,8 +53,7 @@ body {
     text-align: center;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 23px;
-    margin: -2px;
+    font-size: 2rem;
     padding: 6px;
 }
 .button {
@@ -47,9 +65,9 @@ body {
     display: inline-block;
     cursor: pointer;
     font-family: "Roboto";
-    font-size: 97%;
     margin: -2px;
     padding: 5px;
+    width: 100%;
 }
 a:link {
     color: white;

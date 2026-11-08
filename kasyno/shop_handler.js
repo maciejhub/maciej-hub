@@ -79,7 +79,7 @@ async function show_items() {
     let stuff_inside = item.querySelector("div")
     let price_text = stuff_inside.querySelectorAll("button")[1].querySelector("b")
     stuff_inside.style.display = "flex";
-    stuff_inside.style.marginRight = "30px";
+    stuff_inside.style.marginRight = "1.5rem";
     stuff_inside.querySelector("button").querySelector("img").src = info["icon"];
     stuff_inside.querySelector("button").querySelector("div").innerText = info["name"];
     if (boughtItems.includes(info["id"])) {

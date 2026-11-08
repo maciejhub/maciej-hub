@@ -1,5 +1,4 @@
 
-//na pewno to kiedyś skończe. obiecuje
 let directory = "/"
 
 function get(element) {
@@ -290,7 +289,7 @@ function createmediapopup(type, link, name) {
 function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) { // stolen from stack overflow
     let ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
     return { width: srcWidth*ratio, height: srcHeight*ratio };
- }
+}
 
 function renderfile(type, name, link) {
   let newfile = get("basefile").cloneNode(true);
@@ -300,8 +299,8 @@ function renderfile(type, name, link) {
   newfile.id = "basefile2"
   if (type == "folder") {
     newfile.querySelector("img").src = "folder.png"
-    newfile.querySelector("img").width = 64
-    newfile.querySelector("img").height = 64
+    newfile.querySelector("img").style.width = "5rem";
+    newfile.querySelector("img").style.height = "5rem";
     if (name == "Wstecz") {
       newfile.querySelector("img").src = "back.png"
     }
@@ -318,28 +317,29 @@ function renderfile(type, name, link) {
     if (link.includes("custom")) {
       format = "custom";
     }
-
+    let width = "4.8rem"
     if (format == "image" && !link.includes("instrukcja.webp")) {
       newfile.querySelector("img").src = `${link}`;
       newfile.querySelector("img").style.display = "none";
       newfile.querySelector("img").addEventListener("load", function () {
-        let res = calculateAspectRatioFit(newfile.querySelector("img").width, newfile.querySelector("img").height, 64, 64)
-        newfile.querySelector("img").width = res["width"]
-        newfile.querySelector("img").height = res["height"]
+        let res = calculateAspectRatioFit(newfile.querySelector("img").width, newfile.querySelector("img").height, rem * 5 - 5, rem * 5 - 5)
+        newfile.querySelector("img").style.width = `${res["width"]}px`;
+        newfile.querySelector("img").style.height = `${res["height"]}px`;
         newfile.querySelector("img").style.display = "inline";
+        return;
       });
     } else if (format == "custom") {
       newfile.querySelector("img").src = link.split("|")[1];
-      newfile.querySelector("img").width = 64
-      newfile.querySelector("img").height = 64
+      newfile.querySelector("img").style.width = width;
+      newfile.querySelector("img").style.height = width;
     } else if (link.includes("instrukcja.webp")) {
       newfile.querySelector("img").src = `video.png`;
-      newfile.querySelector("img").width = 64
-      newfile.querySelector("img").height = 64
+      newfile.querySelector("img").style.width = width;
+      newfile.querySelector("img").style.height = width;
     } else {
       newfile.querySelector("img").src = `${format}.png`;
-      newfile.querySelector("img").width = 64
-      newfile.querySelector("img").height = 64
+      newfile.querySelector("img").style.width = width;
+      newfile.querySelector("img").style.height = width;
     }
   }
 

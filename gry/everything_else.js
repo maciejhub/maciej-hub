@@ -10,19 +10,24 @@ get("6").appendChild(get("zntr"));
 get("7").appendChild(get("asmrbulka"));
 get("8").appendChild(get("skibidi"));
 
+let screen_orientation = "landscape"
+
+if (screen.orientation) { // this exists because screen.orientation doesn't exist on the gnome web browser (i was using it to test webkit compatibility and noticed this)
+  screen_orientation = screen.orientation.type;
+}
+
 document.querySelectorAll("iframe").forEach(function (frame) {
   if (frame.src.includes("bottomthing")) {
     return;
   }
-  if (screen.orientation.type.includes("landscape")) {
-    frame.width = "480px";
-    frame.contentWindow.location.reload();
+  if (screen_orientation.includes("landscape")) {
+    frame.style.width = "27rem";
   } else {
-    frame.width = "90%";
+    frame.style.width = "90%";
   }
 
-  frame.addEventListener("load", function () {
-    frame.height = `${frame.contentWindow.document.body.scrollHeight + 50}px`;
+  frame.addEventListener("load", async function () {
+    frame.style.height = `${frame.contentDocument.body.scrollHeight}px`;
   });
 });
 

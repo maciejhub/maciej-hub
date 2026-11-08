@@ -1,6 +1,7 @@
 // universal script for everything
 
 let is_pwa = window.matchMedia('(display-mode: standalone)').matches;
+let rem = parseInt(getComputedStyle(document.documentElement).fontSize);
 
 let path = window.location.pathname;
 window.parent.postMessage(window.location.pathname);
@@ -22,7 +23,7 @@ if (localStorage.ikonpng == "/randomikon.png") {
   icon = `/${icons[Math.floor(Math.random() * icons.length)]}.png`;
 }
 if (document.getElementById("topthing")) {
-    document.getElementById("topthing").innerHTML = `<div class=center><img id='topicon' src='/ikony${icon}' width=200><hr width='100%' color='#38393f' size='3'><h2><div id='topthingthings'><a style='margin-left: 7px;' id='wiersz' href='/wiersz'>Wiersz</a><a style='margin-left: 7px;' id='extra' href='/extra'>Różne fajne rzeczy</a><a style='margin-left: 7px;' id='gry/' href='/gry/'>Fajne gry</a><a style='margin-left: 7px;' id='kasyno/' href='/kasyno'>Kasyno</a><a style='margin-left: 7px;' id='system/' href='/system/'>Ciekawy system</a></div><hr width='100%;' color='#38393f' size='3'><i style='color:gray;'> NAD TYM SĄ PRZYCISKI DO PRZYCIŚNIĘCIA</i></h2></div>`
+    document.getElementById("topthing").innerHTML = `<div style='margin-bottom: -1.6rem; font-size: 1rem;' class=center><img id='topicon' src='/ikony${icon}' style='width: 14rem; margin-top: 1rem;'><hr width='100%' color='#38393f' size='3'><div style='font-size: 1.8rem'><div style='margin-top: 0.6rem; margin: 1rem;' id='topthingthings'><a style='margin-left: 7px;' id='wiersz' href='/wiersz'>Wiersz</a><a style='margin-left: 7px;' id='extra' href='/extra'>Różne fajne rzeczy</a><a style='margin-left: 7px;' id='gry/' href='/gry/'>Fajne gry</a><a style='margin-left: 7px;' id='kasyno/' href='/kasyno'>Kasyno</a><a style='margin-left: 7px;' id='system/' href='/system/'>Ciekawy system</a></div><hr width='100%;' color='#38393f' size='3'><i style='color: gray;'> NAD TYM SĄ PRZYCISKI DO PRZYCIŚNIĘCIA</i></div></div><br>`
   if (document.getElementById(path.substring(1, path.length))) {
     document.getElementById(path.substring(1, path.length)).remove();
   } else {
@@ -30,6 +31,14 @@ if (document.getElementById("topthing")) {
   }
 } else {
   console.log("no topthing");
+}
+
+if (!localStorage.quest) {
+  localStorage.setItem("quest", "");
+}
+
+if (!localStorage.boughtItems) {
+  localStorage.setItem("boughtItems", "[\"none\"]");
 }
 
 const queryString = window.location.search;
@@ -204,15 +213,15 @@ setTimeout(function () {
       let frame_document = iframe.contentWindow.document
       let version_text = frame_document.getElementById("version_text")
       frame_document.getElementById("licenses").addEventListener("click", function () {
-        createnewpopup("licensepopup", `<iframe src='/iframes/licenses.html' width=600px scrolling='yes' id='versionthing' frameborder='0'></iframe>`, "", "false");
-        get("licensepopup").querySelector("iframe").width = `${get("licensepopup").clientWidth}px`
-        get("licensepopup").querySelector("iframe").height = `${get("licensepopup").querySelector("iframe").clientHeight + 75}px`
+        createnewpopup("licensepopup", `<iframe src='/iframes/licenses.html' scrolling='yes' id='versionthing' frameborder='0'></iframe>`, "", "false");
+        get("licensepopup").querySelector("iframe").style.width = `${get("licensepopup").clientWidth}px`
+        get("licensepopup").querySelector("iframe").style.height = `${get("licensepopup").querySelector("iframe").clientHeight + 75}px`
       });
       version_text.innerText = `wersja ${manifest_ver}${allVersions[allVersions.length - 1].split(" ")[0]}`;
       version_text.addEventListener("click", function () {
-        createnewpopup("versionpopup", "<iframe src='/iframes/versionthing' width=600px scrolling='yes' id='versionthing' frameborder='0'></iframe>", "");
-        get("versionpopup").querySelector("iframe").width = `${get("versionpopup").clientWidth}px`
-        get("versionpopup").querySelector("iframe").height = `${get("versionpopup").querySelector("iframe").clientHeight + 15}px`
+        createnewpopup("versionpopup", "<iframe src='/iframes/versionthing' style='margin-left: 1rem; margin-right: 1rem;' scrolling='yes' id='versionthing' frameborder='0'></iframe>", "");
+        get("versionpopup").querySelector("iframe").style.width = `${get("versionpopup").clientWidth - 20}px`
+        get("versionpopup").querySelector("iframe").style.height = `${get("versionpopup").querySelector("iframe").clientHeight + 15}px`
       });
     }
   });
