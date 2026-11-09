@@ -3,19 +3,21 @@
   "short_name": "maciej hub",
   "start_url": "/mch_pwa_start",
   "description": "Aplikacja maciej hub aby mieć szybszy dostęp do twojej ulubionej strony internetowej. Są dostępne ustawienia w różnych fajnych rzeczach, których nie ma na stronie.",
-  "version": "a1",
+  "version": "a2",
   "id": "/mch_pwa_start",
   "scope": "/",
   "icons": [
     {
       "src": "favicons/web-app-manifest-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "favicons/web-app-manifest-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "theme_color": "#222222",
