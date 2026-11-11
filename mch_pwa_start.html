@@ -28,13 +28,18 @@
 <script src="topthingscript.js?2"></script>
 <script>
 let pwa_settings = undefined;
+const parameters = new URLSearchParams(window.location.search);
+
 if (!localStorage.pwa_settings) {
   let default_settings = {
     "default_page": "/wiersz"
   }
   localStorage.setItem("pwa_settings", JSON.stringify(default_settings));
 }
-pwa_settings = JSON.parse(localStorage.pwa_settings)
+pwa_settings = JSON.parse(localStorage.pwa_settings);
+sessionStorage.setItem("pwa_version", `${parameters.get("pwa_version")}_${parameters.get("expected_sw")}`);
+console.log(parameters.get("pwa_version"))
+
 window.location.href = pwa_settings["default_page"];
 </script>
 </body>

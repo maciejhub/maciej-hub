@@ -224,7 +224,7 @@ function again() {
             if (i == 3 || i == 6 || i == 9) {
                 const randomgetter = getRandomInt(8) + 1;
                 rolls.push(randomgetter);
-                document.getElementById("mythingdingle").innerHTML += `<br><span style="width: rem; margin-left: 0.25rem; margin-right: 0.25rem;" id='item${i}'><img style='width: 4rem;' src=kasynozdjecie/${randomgetter}.png></span>`;
+                document.getElementById("mythingdingle").innerHTML += `<br><span style="width: 4rem; margin-left: 0.25rem; margin-right: 0.25rem;" id='item${i}'><img style='width: 4rem;' src=kasynozdjecie/${randomgetter}.png></span>`;
             } else {
                 const randomgetter = getRandomInt(8) + 1;
                 rolls.push(randomgetter);

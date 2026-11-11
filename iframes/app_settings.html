@@ -13,7 +13,7 @@
         background-color: transparent;
         overflow: auto;
         height: 100%;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         text-align: center;
     }
 
@@ -46,7 +46,7 @@ Najlepiej to działa w Chrome (nie na iOS), ale jeżeli chcesz na swojej przegl�
           Spróbuj w innej przeglądarce, najlepiej w jakiejś wersji Google Chrome. Jeżeli już masz pobraną aplikację, wejdź w nią aby zmienić ustawienia.
       </div>
       <div hidden id="app_settings">
-          Ustawienia aplikacji maciej hub<br><br>
+        Ustawienia aplikacji maciej hub<br><br>
         Kiedy otwiera się aplikacja ma się włączyć:
           <select id="default_page" style="margin-top: 8px; border: 7px solid #191919;" class="basiccontainer">
               <option selected value="/wiersz">Wiersz</option>
@@ -55,6 +55,9 @@ Najlepiej to działa w Chrome (nie na iOS), ale jeżeli chcesz na swojej przegl�
               <option value="/extra">Różne fajne rzeczy</option>
               <option value="/kasyno">Kasyno</option>
           </select>
+        <div style="margin-bottom: 0.6rem;"></div>
+        <span>Powiadomienia dla nowych wiadomości <input id="notifications" type="checkbox"></span>
+        <br><br>
       </div>
       <script src="https://unpkg.com/bowser@2/es5.js"></script>
       <script src="/universal_functions.js"></script>
@@ -68,15 +71,55 @@ if (is_pwa) {
   get("app_settings").hidden = false;
   if (!localStorage.pwa_settings) {
     let default_settings = {
-      "default_page": "/wiersz"
+      "default_page": "/wiersz",
+      "notifications": "false"
     }
     localStorage.setItem("pwa_settings", JSON.stringify(default_settings));
   }
   let pwa_settings = JSON.parse(localStorage.pwa_settings);
   get("default_page").value = pwa_settings["default_page"];
+  get("notifications").checked = pwa_settings["notifications"];
   get("default_page").addEventListener("change", function () {
     pwa_settings["default_page"] = get("default_page").value;
     localStorage.setItem("pwa_settings", JSON.stringify(pwa_settings));
+  });
+  get("notifications").addEventListener("click", async function (egg) {
+    pwa_settings["notifications"] = get("notifications").checked;
+    localStorage.setItem("pwa_settings", JSON.stringify(pwa_settings));
+
+    // modified from ai
+    const open_request = indexedDB.open("database", 1);
+
+    open_request.onupgradeneeded = function () {
+      let database = open_request.result;
+      database.createObjectStore("notification", { keyPath: "id" })
+    }
+
+    open_request.onsuccess = (e) => {
+      const database = open_request.result;
+
+      const writeTx = database.transaction("notification", "readwrite");
+      writeTx.objectStore("notification").put({ id: 1, text: pwa_settings["notifications"] });
+    };
+
+    open_request.onerror = (e) => {
+      console.error("Database open failed ", e.target.error);
+    };
+
+    if (pwa_settings["notifications"]) {
+      if (!("Notification" in window)) { // this one line is from ai
+         alert("Twoja przeglądarka nie wspiera powiadomień")
+      }
+      if (Notification.permission === "granted" || Notification.permission === "denied")  {
+        return;
+      }
+
+      await Notification.requestPermission();
+
+      if (Notification.permission == "denied") {
+        get("notifications").checked = false;
+      }
+    }
   });
 } else {
   if (os == "iOS") {

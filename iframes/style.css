@@ -17,6 +17,10 @@
     }
 }
 
+iframe {
+    border: none;
+}
+
 .loader {  /* stolen from some site with spinners i forgot*/
   --color-1: #fff;
   --size: 1.32px;
@@ -69,7 +73,7 @@ a:visited {
 .basiccontainer {
     background-color: #222222;
     padding: 7px;
-    border: 10px solid #191919;
+    border: 7px solid #191919;
     align-items: center;
     justify-content: center;
     text-align: center;

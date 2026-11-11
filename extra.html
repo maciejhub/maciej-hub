@@ -43,10 +43,12 @@
         </div>
         <div style="font-size: 1.8rem;">
             <button id="app" class="button">Pobierz aplikację maciej hub</button>
-            <div class="linebreak"></div>
-            <button onclick="showqrs()" class="button">Zobacz kody QR z maciej hub</button>
+            <!--
             <div class="linebreak"></div>
             <button onclick="notification()" id="notificationtext" class="button">Włącz powiadomienia na nowe wiadomości</button>
+            --->
+            <div class="linebreak"></div>
+            <button onclick="showqrs()" class="button">Zobacz kody QR z maciej hub</button>
             <div class="linebreak"></div>
             <button onclick="showmessages()" class="button">Zobacz nowe wiadomości</button>
             <div class="linebreak"></div>
@@ -133,6 +135,7 @@ let install_prompt = undefined;
 let pwa_prompt_supported = false;
 
 window.addEventListener("beforeinstallprompt", (event) => {
+  console.log("install promot")
   get("app").hidden = true;
   install_prompt = event;
   pwa_prompt_supported = true;
@@ -161,12 +164,10 @@ get("app").addEventListener("click", function () {
     if (height > window.innerHeight * 0.7) {
       height = window.innerHeight * 0.7;
     }
-    if (height < 150) {
       get(`closepopupbutton${popupnumber}`).style.marginBottom = "3rem";
       get(`closepopupbutton${popupnumber}`).style.marginTop = "-2rem";
-    }
-    get("extrapopup").style.height = `${height}px`;
     frame.style.height = `${height - 82}px`;
+    get("extrapopup").style.height = `${height}px`;
     frame.style.width = `${get("extrapopup").clientWidth}px`;
   });
 
@@ -174,12 +175,6 @@ get("app").addEventListener("click", function () {
 
 if (is_pwa) {
   get("app").innerText = "Zmień ustawienia aplikacji";
-}
-
-if (Notification) {
-  if (Notification?.permission == "granted") {
-    document.getElementById("notificationtext").innerHTML = "Włącz powiadomienia na nowe wiadomości (Włączone)";
-  }
 }
 </script>
 <iframe src="bottomthing" height="200px" frameborder="0" width="100%"></iframe>

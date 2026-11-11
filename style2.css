@@ -80,6 +80,10 @@ select {
     font-weight: normal;
 }
 
+iframe {
+    border: none;
+}
+
 /* unvisited link */
 a:link {
     color: white;

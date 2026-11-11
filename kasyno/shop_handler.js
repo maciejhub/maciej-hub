@@ -19,6 +19,13 @@ const ikons = {
       "type": "ikon"
     },
     {
+      "id": "plikon",
+      "name": "Ikon z okazji dnia niepodległości",
+      "icon": "/ikony/plikon.png",
+      "price": "5",
+      "type": "ikon"
+    },
+    {
       "id": "bdikon",
       "name": "Ikon z okazji pierwszej rocznicy maciej hub",
       "icon": "/ikony/bdikon.png",

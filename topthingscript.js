@@ -123,94 +123,13 @@ function removeTags(str) {
 let popupnumber = 0;
 let lastpopupid;
 
-
-async function nopermissionnotification() {
-  if (Notification?.permission == "granted" && Notification?.permission != "default") {
-    if (document.getElementById("notificationtext")) {
-      document.getElementById("notificationtext").innerHTML =
-        "<b>Włącz powiadomienia na nowe wiadomości (Włączone)</b>";
-    }
-    const img = "ikon.png";
-    let allMessages = "error";
-    fetch("/allMessages.json", {
-      cache: 'no-cache'
-    })
-    .then(response => response.text())
-    .then(data => {
-      allMessages = JSON.parse(data)
-    })
-    .catch(allMessages = ["Error, nie można wziąść najnowszej wiadomości"]);
-    await sleep(500);
-    if (allMessages == "error") {
-      allMessages = ["Error, nie można wziąść najnowszej wiadomości"]
-    }
-    let newestmessage = removeTags(allMessages[allMessages.length - 1]);
-    if (
-      localStorage.lastMessageRead != allMessages[allMessages.length - 1] &&
-      allMessages[0] != "Error"
-    ) {
-      const notification = new Notification("Nowa wiadomość!", {
-        body: newestmessage,
-        icon: img,
-      });
-      localStorage.setItem(
-        "lastMessageRead",
-        allMessages[allMessages.length - 1],
-      );
-    } else {
-      console.log("Not going to annoy with notification");
-    }
-  }
-}
-async function notification() {
-  Notification.requestPermission().then(async (result) => {
-    if (result == "granted") {
-      if (document.getElementById("notificationtext")) {
-        document.getElementById("notificationtext").innerHTML =
-          "<b>Włącz powiadomienia na nowe wiadomości (Włączone)</b>";
-      }
-      const img = "ikon.png";
-      let allMessages = "error";
-      fetch("/allMessages.json", {
-        cache: 'no-cache'
-      })
-      .then(response => response.text())
-      .then(data => {
-        allMessages = JSON.parse(data)
-      })
-      .catch(allMessages = ["Error, nie można wziąść najnowszej wiadomości"]);
-      await sleep(500);
-      if (allMessages == "error") {
-        allMessages = ["Error, nie można wziąść najnowszej wiadomości"]
-      }
-      let newestmessage = removeTags(allMessages[allMessages.length - 1]);
-      if (
-        localStorage.lastMessageRead != allMessages[allMessages.length - 1] &&
-        allMessages[0] != "Error"
-      ) {
-        const notification = new Notification("Nowa wiadomość!", {
-          body: newestmessage,
-          icon: img,
-        });
-        localStorage.setItem(
-          "lastMessageRead",
-          allMessages[allMessages.length - 1],
-        );
-      } else {
-        console.log("Not going to annoy with notification");
-      }
-    }
-  });
-}
-nopermissionnotification();
-
 setTimeout(function () {
   document.querySelectorAll("iframe").forEach(async function (iframe) {
     if (iframe.src.includes("bottomthing")) {
       let allVersions = JSON.parse(await fetch_mch_file("/versions.json"));
       let manifest_ver = "";
-      if (is_pwa) {
-        manifest_ver = `${JSON.parse(await fetch_mch_file("/manifest.json", "force-cache"))["version"]}-`;
+      if (is_pwa && sessionStorage.pwa_version) {
+        manifest_ver = `${sessionStorage.getItem("pwa_version")}-`;
       }
 
       iframe.height = iframe.scrollHeight + 150;
