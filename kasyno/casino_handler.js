@@ -26,6 +26,25 @@ function sleep(ms) { // stolen
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function give_token_string(tokens) {
+  let token_string = "tokenów"
+  let lastnumintokens = parseInt(tokens.toString().charAt(tokens.toString().length - 1));
+  if (tokens < 20 && tokens > 10 || (tokens > 1 && lastnumintokens == 1)) {
+    token_string = "tokenów";
+  } else {
+    if (lastnumintokens == 4 || lastnumintokens == 3 || lastnumintokens == 2) {
+      token_string = "tokeny";
+    } else {
+      token_string = "tokenów";
+    }
+
+    if (tokens == 1) {
+      token_string = "token";
+    }
+  }
+  return token_string;
+}
+
 async function plusanimation2(oldtokens, newtokens) {
   animationhappening = true;
   let difference = newtokens - oldtokens;
@@ -43,18 +62,12 @@ async function plusanimation2(oldtokens, newtokens) {
 
   await sleep(1000);
   lastnumintokens = parseInt(newtokens.toString().charAt(newtokens.toString().length - 1));
-  if (lastnumintokens == 4 || lastnumintokens == 3 || newtokens == 2) {
-      document.getElementById("tokencounter").innerHTML = newtokens + " tokeny";
-  } else {
-      document.getElementById("tokencounter").innerHTML = newtokens + " tokenów";
-  }
+  let token_string = give_token_string(newtokens)
 
-  if (newtokens == 1) {
-      document.getElementById("tokencounter").innerHTML = newtokens + " token";
-  }
+  get("tokencounter").innerHTML = `${newtokens} ${token_string}`;
   await sleep(800);
-  document.getElementById("plus").innerHTML = "";
-  document.getElementById("plus").style.marginRight = "0px";
+  get("plus").innerHTML = "";
+  get("plus").style.marginRight = "0px";
   tokens = newtokens
   animationhappening = false;
 }
@@ -182,17 +195,8 @@ if (localStorage.visitedCasino) {
 function updateeverything() {
   if (animationhappening == false) {
     localStorage.setItem("casinoTokens", tokens);
-    let lastnumintokens = parseInt(localStorage.casinoTokens.charAt(localStorage.casinoTokens.toString().length - 1));
 
-    if (lastnumintokens == 4 || lastnumintokens == 3 || localStorage.casinoTokens == 2) {
-        document.getElementById("tokencounter").innerHTML = localStorage.casinoTokens + " tokeny";
-    } else {
-        document.getElementById("tokencounter").innerHTML = localStorage.casinoTokens + " tokenów";
-    }
-
-    if (localStorage.casinoTokens == 1) {
-        document.getElementById("tokencounter").innerHTML = localStorage.casinoTokens + " token";
-    }
+    get("tokencounter").innerText = `${localStorage.casinoTokens} ${give_token_string(localStorage.casinoTokens)}`;
   }
     setTimeout(updateeverything, 100);
 }
@@ -280,15 +284,7 @@ let difference = tokens - localStorage.casinoPreviousTokens;
 
 async function plusanimation() {
   let lastnumintokens = parseInt(localStorage.casinoPreviousTokens.charAt(localStorage.casinoPreviousTokens.toString().length - 1));
-  if (lastnumintokens == 4 || lastnumintokens == 3 || localStorage.casinoPreviousTokens == 2) {
-        document.getElementById("tokencounter").innerHTML = localStorage.casinoPreviousTokens + " tokeny";
-    } else {
-        document.getElementById("tokencounter").innerHTML = localStorage.casinoPreviousTokens + " tokenów";
-    }
-
-    if (localStorage.casinoTokens == 1) {
-        document.getElementById("tokencounter").innerHTML = localStorage.casinoPreviousTokens + " token";
-    }
+  get("tokencounter").innerText = `${localStorage.casinoPreviousTokens} ${give_token_string(localStorage.casinoPreviousTokens)}`;
   await sleep(500);
   document.getElementById("plus").style.marginRight = "10px";
   document.getElementById("plus").innerHTML = " +" + difference;

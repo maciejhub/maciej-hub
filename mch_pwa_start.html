@@ -37,8 +37,12 @@ if (!localStorage.pwa_settings) {
   localStorage.setItem("pwa_settings", JSON.stringify(default_settings));
 }
 pwa_settings = JSON.parse(localStorage.pwa_settings);
-sessionStorage.setItem("pwa_version", `${parameters.get("pwa_version")}_${parameters.get("expected_sw")}`);
-console.log(parameters.get("pwa_version"))
+if (parameters.get("pwa_version") !== null && parameters.get("expected_sw") !== null) {
+  sessionStorage.setItem("pwa_version", `${parameters.get("pwa_version")}_${parameters.get("expected_sw")}`);
+  console.log(parameters.get("pwa_version"));
+} else {
+  sessionStorage.setItem("pwa_version", "m0_sw0");
+}
 
 window.location.href = pwa_settings["default_page"];
 </script>

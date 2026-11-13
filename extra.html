@@ -143,32 +143,24 @@ window.addEventListener("beforeinstallprompt", (event) => {
 
 get("app").addEventListener("click", function () {
   let popupnumber = undefined;
-  if (is_pwa) {
+  if (pwa_prompt_supported && !is_pwa) {
+    install_prompt.prompt();
+  } else {
     popupnumber = createnewpopup("extrapopup", "<iframe src='/iframes/app_settings.html' scrolling='yes' frameborder='0'></iframe>", "");
     get("extrapopup").querySelector("iframe").style.width = `${get("extrapopup").clientWidth * 0.9}px`;
-  } else {
-    if (pwa_prompt_supported) {
-      install_prompt.prompt();
-    } else {
-      popupnumber = createnewpopup("extrapopup", "<iframe src='/iframes/app_settings.html' scrolling='yes' frameborder='0'></iframe>", "");
-      get("extrapopup").querySelector("iframe").style.width = `${get("extrapopup").clientWidth * 0.9}px`;
-    }
   }
-  get(`closepopupbutton${popupnumber}`).style.marginBottom = "2rem";
-  //get(`closepopupbutton${popupnumber}`).style.marginTop = "-2rem";
-
+  get(`closepopupbutton${popupnumber}`).style.transform = "translateY(-1.2rem)";
   let frame = get("extrapopup").querySelector("iframe")
-  frame.addEventListener("load", function () {
-    console.log(`${frame.contentWindow.document.body.scrollHeight} vs ${frame.clientHeight}`);
-    let height = frame.contentWindow.document.body.scrollHeight + 100;
-    if (height > window.innerHeight * 0.7) {
-      height = window.innerHeight * 0.7;
+  window.addEventListener("message", function (e) {
+    if (typeof(e.data) == "number") {
+      let height = e.data + 1.5 * rem;
+      if (height > window.innerHeight * 0.7) {
+        height = window.innerHeight * 0.7;
+      }
+      frame.style.height = `${height}px`;
+      get("extrapopup").style.height = `${height + 100}px`;
+      frame.style.width = `${get("extrapopup").clientWidth}px`;
     }
-      get(`closepopupbutton${popupnumber}`).style.marginBottom = "3rem";
-      get(`closepopupbutton${popupnumber}`).style.marginTop = "-2rem";
-    frame.style.height = `${height - 82}px`;
-    get("extrapopup").style.height = `${height}px`;
-    frame.style.width = `${get("extrapopup").clientWidth}px`;
   });
 
 });
